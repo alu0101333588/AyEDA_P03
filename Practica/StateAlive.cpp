@@ -7,16 +7,16 @@
 #include "Grid.h"
 
 
-StateDead::StateDead() {
-    State_ = ' ';
+StateAlive::StateAlive() {
+    State_ = 'X';
 }
 
-char StateDead::getState() const {
+char StateAlive::getState() const {
     return State_;
 }
 
-State* StateDead::nextState() {
-    if (neighbors_ == 3) {
+State* StateAlive::nextState() {
+    if (neighbors_ == 2 || neighbors_ == 3) {
         return new StateAlive;
     } else {
         return new StateDead;
@@ -24,17 +24,13 @@ State* StateDead::nextState() {
     
 }
 
-void StateDead::neighbors (const Grid& rejilla1, int i, int j) {
-    std::cout << "neighbors StateDead OK" << std::endl;
+void StateAlive::neighbors (const Grid& rejilla1, int i, int j) {
     int contador = 0;
 
     for (int a = i-1; a < i+2; a++){
         for (int b = j-1; b < j+2; b++){
-            //std::cout << "Contador: " << i << ", " << j << " :: " << i_ << ", " << j_ << std::endl;
             if (b != j || a != i) {
-                std::cout << "neighbors2 StateDead OK" << std::endl;
                 char estado1 = rejilla1.getCell(a,b).getState();
-                std::cout << "neighbors3 StateDead OK" << std::endl;
                 if (estado1 == 'X') {
                     contador++;
                 }  

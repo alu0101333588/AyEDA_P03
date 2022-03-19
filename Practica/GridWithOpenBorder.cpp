@@ -6,15 +6,99 @@
 #include "Cell.h"
 #include "StateDead.h"
 
+GridWithOpenBorder::GridWithOpenBorder(int filas, int columnas) {
+    rejilla_ = new Cell*[filas];
+    filas_ = filas;
+    columnas_ = columnas;
+    nTurnos_ = -1;
+    for (int i = 0; i < columnas; i++) {
+        rejilla_[i] = new Cell[columnas];
+    }
 
-const Cell& GridWithOpenBorder::getCell(int i, int j) const {
-    
-    // tengo que preguntar si es frontera o no 
-    Grid rejilla2(1,1);
-    rejilla2[0][0] = new StateDead;  
-    return rejilla2[0][0];
+    for (int i = 0; i < filas; i++) {
+        for(int j = 0; j < columnas; j++) {
+            rejilla_[i][j].setposicion(i, j);
+        }
+    }
+
+    rejillaMuerta_ = new Cell*[1];
+    rejillaMuerta_[0] = new Cell[1];
+    rejillaMuerta_[0][0].setState(new StateDead);
 }
 
+/*const Cell& GridWithOpenBorder::getCell(int i, int j) const {
+    std::cout << "Here" << std::endl;
+    if (i < 0 || i >= filas_ || j < 0 || j >= columnas_) {
+        return rejillaMuerta_[0][0];
+    } else {
+        std::cout << "live is live " << i << ", " << j << ": " << rejilla_[i][j].getState() <<std::endl;
+        return rejilla_[i][j];
+    }
+
+    std::cout << "GetCellOK" << std::endl;
+    
+}*/
+
 Cell& GridWithOpenBorder::getCell(int i, int j) {
-    return rejilla_[i][j];
+
+    if (i < 0 || i >= filas_ || j < 0 || j >= columnas_) {
+        return rejillaMuerta_[0][0];
+    } else {
+        std::cout << "live is live " << i << ", " << j << ": " << rejilla_[i][j].getState() <<std::endl;
+        return rejilla_[i][j];
+    }
+
+
+    /*if (i < 0 || i >= filas_ || j < 0 || j >= columnas_) {
+        getCell(i, j);
+        std::cerr << "ERROR en el getCell(int, int)" << std::endl;
+    }
+    return rejilla_[i][j];*/
+}
+
+
+/*std::ostream& operator<<(std::ostream& os, const GridWithOpenBorder &grid1) {
+
+    std::cout << "TURNO " << grid1.nTurnos_ << ": " << std::endl << "  ";
+    for (int i = 0; i < grid1.columnas_; i++){ // Leyenda números parte superior
+        os << i << " ";
+    }
+    os << std::endl;
+    for (int i = 0; i < grid1.filas_; i++) { // Se imprimen por pantalla las células
+        os << i << " ";
+        for (int j = 0; j < grid1.columnas_; j++) {
+            os << grid1.rejilla_[i][j] << " ";
+        } 
+        os << std::endl;
+    }
+    for (int i = 0; i < grid1.columnas_; i++){
+        os << "__";
+    }
+    os << std::endl;
+    return os;
+}*/
+
+
+void GridWithOpenBorder::Print() {
+    std::cout << "PRINT" << std::endl;
+
+    std::cout << "TURNO " << nTurnos_ << ": " << std::endl << "  ";
+    for (int i = -1; i < columnas_+1; i++){ // Leyenda números parte superior
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    for (int i = -1; i < filas_+1; i++) { // Se imprimen por pantalla las células
+        std::cout << i << " ";
+        for (int j = -1; j < columnas_+1; j++) {
+            //char estado1 = getCell(i,j).getState();
+            //Cell prueba = getCell(i, j);
+            std::cout << getCell(i, j).getState() << " ";
+            //std::cout << estado1 << " ";
+        } 
+        std::cout << std::endl;
+    }
+    for (int i = -1; i < columnas_+1; i++){
+        std::cout << "__";
+    }
+    std::cout << std::endl;
 }

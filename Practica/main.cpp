@@ -10,11 +10,15 @@
 
 int main() {
 
-    unsigned int filas = 0, columnas = 0, tipoRejilla = 1;
+    int nfilas = 0, ncolumnas = 0, tipoRejilla = 1;
     std::cout << "Indica el tamaño de la rejilla (FilasxColumnas)(NxM): ";
-    std::cin >> filas >> columnas; // Filas x Columnas 
-    Grid rejilla1(filas, columnas);
-    visualizacion();
+    std::cin >> nfilas >> ncolumnas; // Filas x Columnas 
+
+    Grid* rejilla1;
+    //std::cout << "prueba: " << rejilla1 << std::endl;
+
+    //GridWithReflectiveBorder* rejilla2();
+    //rejilla2.GridWithReflectiveBorder(nfilas, ncolumnas);
 
     std::cout << "______________________ " << std::endl;
     std::cout << "Rejillas disponibles: " << std::endl;
@@ -25,27 +29,33 @@ int main() {
     std::cout << "Indica el tipo de rejilla: ";
     std::cin >> tipoRejilla;
 
-    while (tipoRejilla < 0 && tipoRejilla > 3) {
+    while (tipoRejilla <= 0 || tipoRejilla > 3) {
         std::cout << "Has introducido un tipo de rejilla no válido, vuelve a intentarlo: ";
         std::cin >> tipoRejilla;
     }
 
     switch (tipoRejilla) {
     case 1:
-        rejilla1 = new GridWithOpenBorder;
+        rejilla1 = new GridWithOpenBorder(nfilas, ncolumnas);
+        //rejilla1 = new GridWithOpenBorder;
         break;
 
     case 2:
-        rejilla1 = new GridWithPeriodicBorder;
+        rejilla1 = new GridWithPeriodicBorder(nfilas, ncolumnas);
+        //rejilla1 = new GridWithPeriodicBorder;
         break;
 
     case 3:
-        rejilla1 = new GridWithReflectiveBorder;
+        rejilla1 = new GridWithReflectiveBorder(nfilas, ncolumnas);
+        //rejilla1 = new GridWithReflectiveBorder;
         break;
     default:
-        rejilla1 = new GridWithOpenBorder;
+        std::cerr << "Ha habido un error a la hora de seleccionar tipo de Frontera" << std::endl;
+        //rejilla1 = new GridWithOpenBorder;
         break;
     }
+
+    rejilla1->Grid::visualizacion();
 
     int i = 0, j = 0;
     std::cout << "A continuación indica las posiciones de las células vivas (i,j)" << std::endl;
@@ -55,7 +65,7 @@ int main() {
         std::cin >> i;
         if (i != -1){
             std::cin >> j;  
-            if(verificacion(i, j)) {
+            if(rejilla1->Grid::verificacion(i, j)) {
                 std::cout << "*** Ha habido un error, introduce valores correctos. *** (ERROR al introducir valores NUMÉRICOS). " << std::endl;
             } else {
                 std::cout << "Subida. Correcta: (" << i << ", " << j << "). Estado: Alive" << std::endl;
@@ -67,12 +77,18 @@ int main() {
     
     int opcionLoop = 1;
     std::cout << "Si desea interrumpir el proceso pulsa 0, sino culquier otro número..." << std::endl;
-    while (opcionLoop != -1) {
-        rejilla1.nextGeneration(rejilla1);
-        std::cout << rejilla1 << std::endl;
+    while (opcionLoop != 0) {
+        rejilla1->Grid::nextGeneration();
+        std::cout << "HOLAAA" << std::endl;
+        rejilla1->Print();
+        //std::cout << "Rejilla: " << rejilla1 << std::endl;
         std::cout << "¿Continuar? (0/1): ";
         std::cin >> opcionLoop;
     }
+
+    std::cout << "Fin del programa. " << std::endl;
+
+    rejilla1->Print();
 
     return 0;
 }

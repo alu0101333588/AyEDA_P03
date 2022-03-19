@@ -1,15 +1,15 @@
-#ifndef STATEDEAD_H
-#define STATEDEAD_H
+#ifndef STATEALIVE_H
+#define STATEALIVE_H
 
 #include "State.h"
 
-class StateDead : public State { 
+class StateAlive : public State { 
     public:
-        StateDead(); 
+        StateAlive(); 
         void neighbors (const Grid& rejilla1, int i, int j);
         State* nextState();
         char getState() const;
-        ~StateDead() = default;
+        ~StateAlive() = default;
 };
 
 #endif
