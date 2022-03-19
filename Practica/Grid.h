@@ -7,30 +7,23 @@
 class Cell;
 class Grid {
     public:
-        Grid(int n, int m, int turnos); // Constructor 
-        const Cell& getCell(int i, int j) const;
-        //void nextGeneration(Grid& rejilla1);
-        bool verificacion(int i, int j); // Marcar como viva la célula ubicada en la posición (i, j)
-                                        // Si sale true entonces ha tenido lugar un error
-        void visualizacion();
+        Grid(int filas, int columnas); // Constructor
 
-        char getGrid(int i, int j);
+        virtual const Cell& getCell(int i, int j) const = 0;
+        virtual Cell& getCell(int i, int j) = 0;
+        void nextGeneration(Grid& rejilla1); // Clase propia
+        virtual ~Grid() = default;
+        virtual void update() = 0; // Actualiza las células del borde de la frontera
 
-        bool Letras(char letra1, int i, int j); // Verifica si la letra es correcta y realiza la actualización en la rejilla 
-        void Menu(Grid& rejilla1); // Menú interactivo para solicitar datos al usuario por pantalla
+        friend std::ostream& operator<<(std::ostream& os, const Grid &grid1); // Inserta sin fronteras incluidas
+        void Print(); // Imprime por pantalla la rejilla con las fronteras incluidas
+        bool verificacion(int i, int j); // verifica que las posiciones existen
 
-
-
-        // NUEVAS FUNCIONES:
-        // const Cell& getCell(int i, int j) const;
-        void nextGeneration(Grid& rejilla1); // SE DEBE ALIMENTAR DE GETCELL !!!!
-
-
-    private:
+    protected:
         Cell** rejilla_;
-        int nTurnos_;
-        int n_; // Dimensiones NxM de la rejilla
-        int m_;
+        int nTurnos_; // va contando los turnos
+        int filas_; // Dimensiones NxM de la rejilla (FilasXColumnas)
+        int columnas_;
 
 };
 

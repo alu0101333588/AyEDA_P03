@@ -12,7 +12,7 @@ StateDead::StateDead() {
 }
 
 /*StateDead::~StateDead() {
-    //delete *State_;
+    //delete[] *State_;
 }*/
 
 

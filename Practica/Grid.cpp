@@ -13,21 +13,17 @@
 
 
 
-char Grid::getGrid(int i, int j) { 
-    return rejilla_[i][j].getState(); 
-}
-
-Grid::Grid(int n, int m, int turnos) {
-    nTurnos_ = turnos;
-    rejilla_ = new Cell*[n+2];
-    n_ = n+2;
-    m_ = m+2;
-    for (int i = 0; i < n+2; i++) {
-        rejilla_[i] = new Cell[m+2];
+Grid::Grid(int filas, int columnas) {
+    rejilla_ = new Cell*[filas];
+    n_ = filas;
+    m_ = columnas;
+    nTurnos_ = -1;
+    for (int i = 0; i < columnas; i++) {
+        rejilla_[i] = new Cell[columnas];
     }
 
-    for (int i = 0; i < n+2; i++) {
-        for(int j = 0; j < m+2; j++) {
+    for (int i = 0; i < filas; i++) {
+        for(int j = 0; j < columnas; j++) {
             rejilla_[i][j].setposicion(i, j);
         }
     }
@@ -39,8 +35,7 @@ void Grid::Menu (Grid& rejilla1) {
     visualizacion();
     int i = 0, j = 0; // i Filas, j Columnas
     char letra = 'M';
-    std::cout << "A continuación indica las posiciones de las células vivas (i,j) y el estado" << std::endl;
-    std::cout << "||| ESTADOS DISPONIBLES: Huevo (H), Larva (L), Pupa (P), Adulta (A), Muerta (M) |||" << std::endl;
+    std::cout << "A continuación indica las posiciones de las células vivas (i,j)" << std::endl;
     std::cout << "****(Cuando desees finalizar escribe -1)****" << std::endl;
     while (i != -1) {
         std::cout << "Introduce (i,j): ";
@@ -61,62 +56,15 @@ void Grid::Menu (Grid& rejilla1) {
     nextGeneration(rejilla1);
 }
 
-bool Grid::Letras(char letra1, int i, int j) {
-    switch (letra1){
-    case 'M':
-        rejilla_[i][j].setState(new StateDead);
-        break;
-    case 'H':
-        rejilla_[i][j].setState(new StateEgg);
-        break;
-    case 'L':
-        rejilla_[i][j].setState(new StateLarva);
-        break;
-    case 'P':
-        rejilla_[i][j].setState(new StatePupa);
-        break;
-    case 'A':
-        rejilla_[i][j].setState(new StateAdult);
-        break;
-    
-    default:
-        return true;
-        break;
-    }
-
-    return false;
-
-}
-
 bool Grid::verificacion(int i, int j) { // verifica si la posición indicada existe o no
-    if (i >= n_-1 || j >= m_-1 || i < 0 || j < 0) {
+    if (i >= filas_ || j >= columnas_ || i < 0 || j < 0) {
         return true; // Manifestamos un error
     }
-    /*State estado1;
-    estado1.setViva();
-    rejilla_[i+1][j+1].setState(estado1);*/
     return false;
 }
 
 void Grid::nextGeneration(Grid& rejilla1){
-
-    std::cout << "TURNO 0: " << std::endl << "  ";
-    for (int i = 0; i < m_-2; i++){ // Leyenda números parte superior
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    for (int i = 1; i < n_-1; i++) { // Se imprimen por pantalla las células
-        std::cout << i-1 << " ";
-        for (int j = 1; j < m_-1; j++) {
-            std::cout << rejilla_[i][j] << " ";
-        } 
-        std::cout << std::endl;
-    }
-
-    for (int i = 0; i < m_-2; i++){
-        std::cout << "__";
-    }
-    std::cout << std::endl;
+    nTurnos_++;
 
     int turn = 0;
     while (turn != nTurnos_) {
@@ -202,4 +150,26 @@ void Grid::visualizacion() {
 
 const Cell& Grid::getCell(int i, int j) const {
     return rejilla_[i][j];
+}
+
+
+friend std::ostream& operator<<(std::ostream& os, const Grid &grid1) {
+
+    std::cout << "TURNO " << nTurnos_ << ": " << std::endl << "  ";
+    for (int i = 0; i < grid1.m_-2; i++){ // Leyenda números parte superior
+        os << i << " ";
+    }
+    os << std::endl;
+    for (int i = 1; i < grid1.n_-1; i++) { // Se imprimen por pantalla las células
+        os << i-1 << " ";
+        for (int j = 1; j < grid1.m_-1; j++) {
+            os << grid1.rejilla_[i][j] << " ";
+        } 
+        os << std::endl;
+    }
+    for (int i = 0; i < grid1.m_-2; i++){
+        os << "__";
+    }
+    os << std::endl;
+    return os;
 }
