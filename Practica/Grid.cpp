@@ -43,7 +43,6 @@ void Grid::nextGeneration(){
     for (int i = 0; i < filas_; i++) { // Se aplican las condiciones
         for (int j = 0; j < columnas_; j++) {
             char estado3 = rejilla_[i][j].getState();
-            std::cout << "nextGeneration1 OK" << std::endl;
             switch (estado3) {
             case ' ':
                 rejilla_[i][j].neighbors(*this);
@@ -59,15 +58,11 @@ void Grid::nextGeneration(){
         } 
     }
 
-    std::cout << "nextGeneration2 OK" << std::endl;
-
     for (int i = 0; i < filas_; i++) { // Se actualiza el estado de las células
         for (int j = 0; j < columnas_; j++) {
             rejilla_[i][j].updateState(); 
         } 
     }
-    std::cout << "nextGeneration3 OK" << std::endl;
-
 }
 
 void Grid::visualizacion() {

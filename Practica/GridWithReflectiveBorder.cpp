@@ -48,6 +48,7 @@ GridWithReflectiveBorder::GridWithReflectiveBorder(int filas, int columnas) {
 }*/
 
 Cell& GridWithReflectiveBorder::getCell(int i, int j) {
+    std::cout << "GETCELL INCORRECTO" << std::endl;
     if (i < 0 || i >= filas_ || j < 0 || j >= columnas_) {
         std::cerr << "ERROR en el getCell(int, int)" << std::endl;
     }

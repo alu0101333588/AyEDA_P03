@@ -7,6 +7,7 @@
 #include "GridWithOpenBorder.h"
 #include "GridWithPeriodicBorder.h"
 #include "GridWithReflectiveBorder.h"
+#include "StateAlive.h"
 
 int main() {
 
@@ -51,7 +52,6 @@ int main() {
         break;
     default:
         std::cerr << "Ha habido un error a la hora de seleccionar tipo de Frontera" << std::endl;
-        //rejilla1 = new GridWithOpenBorder;
         break;
     }
 
@@ -68,6 +68,7 @@ int main() {
             if(rejilla1->Grid::verificacion(i, j)) {
                 std::cout << "*** Ha habido un error, introduce valores correctos. *** (ERROR al introducir valores NUMÉRICOS). " << std::endl;
             } else {
+                rejilla1->getCell(i,j).setState(new StateAlive);
                 std::cout << "Subida. Correcta: (" << i << ", " << j << "). Estado: Alive" << std::endl;
             }
         }
@@ -88,7 +89,7 @@ int main() {
 
     std::cout << "Fin del programa. " << std::endl;
 
-    rejilla1->Print();
+    //rejilla1->Print();
 
     return 0;
 }
