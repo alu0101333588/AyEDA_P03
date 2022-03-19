@@ -8,13 +8,12 @@ class Cell;
 class Grid {
     public:
         Grid() {} // Constructor
-        //virtual const Cell& getCell(int i, int j) const = 0;
+        virtual const Cell& getCell(int i, int j) const = 0;
         virtual Cell& getCell(int i, int j) = 0;
 
         void nextGeneration(/*Grid& rejilla1*/); // Clase propia
         virtual ~Grid() = default;
 
-        //virtual friend std::ostream& operator<<(std::ostream& os, const Grid &grid1) = 0; // Inserta sin fronteras incluidas
         virtual void Print() = 0; // Imprime por pantalla la rejilla con las fronteras incluidas
         bool verificacion(int i, int j); // verifica que las posiciones existen
         void visualizacion();

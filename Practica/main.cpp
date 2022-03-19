@@ -79,17 +79,13 @@ int main() {
     int opcionLoop = 1;
     std::cout << "Si desea interrumpir el proceso pulsa 0, sino culquier otro número..." << std::endl;
     while (opcionLoop != 0) {
-        rejilla1->Grid::nextGeneration();
-        std::cout << "HOLAAA" << std::endl;
         rejilla1->Print();
-        //std::cout << "Rejilla: " << rejilla1 << std::endl;
+        rejilla1->Grid::nextGeneration();
         std::cout << "¿Continuar? (0/1): ";
         std::cin >> opcionLoop;
     }
 
     std::cout << "Fin del programa. " << std::endl;
-
-    //rejilla1->Print();
 
     return 0;
 }

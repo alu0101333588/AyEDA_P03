@@ -10,7 +10,6 @@ void Cell::updateState(){
 }
 
 void Cell::neighbors(const Grid& rejilla1) { // Indica el número de células vecinas vivas
-    std::cout << "neighbors OK" << std::endl;
     estado_->neighbors(rejilla1, i_, j_);
 }
 
