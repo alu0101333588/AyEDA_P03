@@ -11,19 +11,27 @@ GridWithOpenBorder::GridWithOpenBorder(int filas, int columnas) {
     filas_ = filas;
     columnas_ = columnas;
     nTurnos_ = 0;
-    for (int i = 0; i < columnas; i++) {
+    std::cout << "Dimensiones " << filas_ << "x" << columnas_ << std::endl;
+    for (int i = 0; i < filas; i++) {
         rejilla_[i] = new Cell[columnas];
     }
 
+    std::cout << "okey 1" << std::endl;
+
     for (int i = 0; i < filas; i++) {
         for(int j = 0; j < columnas; j++) {
+            std::cout << "prueba: " << i << "," << j << std::endl;
             rejilla_[i][j].setposicion(i, j);
         }
     }
 
+    std::cout << "okey 2" << std::endl;
+
     rejillaMuerta_ = new Cell*[1];
     rejillaMuerta_[0] = new Cell[1];
     rejillaMuerta_[0][0].setState(new StateDead);
+
+    std::cout << "okey 3" << std::endl;
 }
 
 const Cell& GridWithOpenBorder::getCell(int i, int j) const {

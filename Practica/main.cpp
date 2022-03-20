@@ -38,17 +38,14 @@ int main() {
     switch (tipoRejilla) {
     case 1:
         rejilla1 = new GridWithOpenBorder(nfilas, ncolumnas);
-        //rejilla1 = new GridWithOpenBorder;
         break;
 
     case 2:
         rejilla1 = new GridWithPeriodicBorder(nfilas, ncolumnas);
-        //rejilla1 = new GridWithPeriodicBorder;
         break;
 
     case 3:
         rejilla1 = new GridWithReflectiveBorder(nfilas, ncolumnas);
-        //rejilla1 = new GridWithReflectiveBorder;
         break;
     default:
         std::cerr << "Ha habido un error a la hora de seleccionar tipo de Frontera" << std::endl;
