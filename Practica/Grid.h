@@ -18,6 +18,8 @@ class Grid {
         bool verificacion(int i, int j); // verifica que las posiciones existen
         void visualizacion();
 
+        //friend std::ostream& operator<<(std::ostream& os, const Grid &grid1);
+
     protected:
         Cell** rejilla_;
         int nTurnos_; // va contando los turnos

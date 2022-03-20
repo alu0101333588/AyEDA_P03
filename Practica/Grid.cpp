@@ -18,7 +18,7 @@
     filas_ = filas;
     columnas_ = columnas;
     nTurnos_ = -1;
-    for (int i = 0; i < columnas; i++) {
+    for (int i = 0; i < filas; i++) {
         rejilla_[i] = new Cell[columnas];
     }
 
@@ -108,4 +108,9 @@ void Grid::visualizacion() {
         std::cout << "__";
     }
     std::cout << std::endl;
+}*/
+
+/*std::ostream& operator<<(std::ostream& os, const Grid &grid1) {
+    os << "--" << std::endl;
+    return os;
 }*/

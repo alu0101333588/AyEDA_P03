@@ -10,7 +10,7 @@ GridWithPeriodicBorder::GridWithPeriodicBorder(int filas, int columnas) {
     filas_ = filas;
     columnas_ = columnas;
     nTurnos_ = 0;
-    for (int i = 0; i < columnas; i++) {
+    for (int i = 0; i < filas; i++) {
         rejilla_[i] = new Cell[columnas];
     }
 
