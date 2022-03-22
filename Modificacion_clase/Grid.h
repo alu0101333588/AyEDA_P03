@@ -17,6 +17,8 @@ class Grid {
         virtual void Print() = 0; // Imprime por pantalla la rejilla con las fronteras incluidas
         bool verificacion(int i, int j); // verifica que las posiciones existen
         void visualizacion();
+        
+        virtual void Contar() = 0;
 
         //friend std::ostream& operator<<(std::ostream& os, const Grid &grid1);
 

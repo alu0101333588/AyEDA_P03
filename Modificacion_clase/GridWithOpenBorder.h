@@ -10,6 +10,8 @@ class GridWithOpenBorder : public Grid {
         Cell& getCell(int i, int j);
         ~GridWithOpenBorder() = default;
 
+        void Contar() {}
+
         void Print(); // Imprime por pantalla la rejilla con las fronteras incluidas
 
         //friend std::ostream& operator<<(std::ostream& os, const GridWithOpenBorder &grid1);

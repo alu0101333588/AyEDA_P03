@@ -28,4 +28,6 @@ class Grid {
 
 };
 
+//inline std::ostream& operator<<(std::ostream& os, const Grid* grid1);
+
 #endif

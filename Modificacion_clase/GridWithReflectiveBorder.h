@@ -11,6 +11,8 @@ class GridWithReflectiveBorder : public Grid {
         Cell& getCell(int i, int j);
         ~GridWithReflectiveBorder() = default;
 
+        void Contar() {}
+
         //friend std::ostream& operator<<(std::ostream& os, const GridWithOpenBorder &grid1);
 
         void Print(); // Imprime por pantalla la rejilla con las fronteras incluidas

@@ -110,7 +110,7 @@ void Grid::visualizacion() {
     std::cout << std::endl;
 }*/
 
-/*std::ostream& operator<<(std::ostream& os, const Grid &grid1) {
+/*std::ostream& operator<<(std::ostream& os, const Grid* grid1) {
     os << "--" << std::endl;
     return os;
 }*/

@@ -15,6 +15,8 @@ class GridWithPeriodicBorder : public Grid {
 
         void Print(); // Imprime por pantalla la rejilla con las fronteras incluidas
 
+        void Contar();
+
 };
 
 #endif
